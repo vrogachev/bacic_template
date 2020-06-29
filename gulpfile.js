@@ -24,7 +24,7 @@ let path = {
         css: source_folder + '/scss/**/*',
         icons: source_folder + '/icons/**/*.svg',
         js: source_folder + '/js/**/*.js',
-        libs: source_folder + '/libs/**/*.js',
+        libs: source_folder + '/js/libs/**/*.js',
         img: source_folder + '/img/**/*',
         fonts: source_folder + '/fonts/*.ttf'
     },
@@ -120,8 +120,8 @@ js = () => {
 // Конкатенация js
 libs = () => {
     return gulp.src([
-        './src/libs/jquery.min.js',
-        './src/libs/**/!(jquery.min.js)*.js'
+        './src/js/libs/jquery.min.js',
+        './src/js/libs/**/!(jquery.min.js)*.js'
     ])
         .pipe(concat('libs.js'))
         .pipe(uglify())

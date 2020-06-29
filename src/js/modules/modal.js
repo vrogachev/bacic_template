@@ -72,7 +72,7 @@ module.exports = $.modal = function (options) {
             setTimeout(() => {
                 this.modal.classList.add('w-modal--open');
                 document.body.classList.add('modal--opened');
-            }, 500);
+            }, 200);
 
         },
         close: function () {
@@ -104,7 +104,4 @@ module.exports = $.modal = function (options) {
         });
 
     }());
-
-
-
 };

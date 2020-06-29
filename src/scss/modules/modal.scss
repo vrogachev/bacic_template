@@ -64,7 +64,16 @@ $index: 1000;
   }
   &--youtube {
     position: relative;
-    max-width: 90rem;
+    width: 90rem;
+    @include mq($from: tablet) {
+      width: 100%;
+    }
+    @include mq($from: desktop) {
+      width: 80rem;
+    }
+    @include mq($from: wide) {
+      width: 90rem;
+    }
     &:after {
       content: '';
       display: block;
