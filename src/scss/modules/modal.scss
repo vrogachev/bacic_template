@@ -1,115 +1,114 @@
 $overlay: rgba(0,0,0,0.5);
 $index: 1000;
 
-.w-modal {
+.modal {
   position: fixed;
-  left: 0;
-  right: 0;
   top: 0;
+  right: 0;
   bottom: 0;
-  height: 100%;
+  left: 0;
+  z-index: $index;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
   opacity: 0;
   pointer-events: none;
   @include anim();
-  z-index: $index;
   &--open {
     opacity: 1;
     pointer-events: all;
     @include anim();
-    .w-modal {
-      &--content {
-        transform: scale(1);
-        @include anim();
-      }
-      &--wrapper {
-        .modal {
-          pointer-events: all;
-          opacity: 1;
-        }
-      }
+    .modal--item,
+    .modal--youtube {
+      transform: scale(1);
+      opacity: 1;
+      @include anim();
     }
   }
-  &--wrapper {
+  &:after {
     content: '';
-    position: absolute;
-    z-index:  $index - 1;
-    padding: 5% 0;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.5);
-    @include anim();
-    overflow-y: scroll;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
+  }
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
   }
   &--content {
     position: relative;
-    transform: scale(0);
-
-    @include anim();
-    > button {
-      position: absolute;
-      right: 0;
-      top: 0;
-      cursor: pointer;
-      z-index: $index + 2;
-      svg {
-        pointer-events: none;
-      }
+    z-index: $index + 1;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 100%;
+    @include mq($from: tablet) {
+      width: auto;
     }
   }
-  &--youtube {
+  &--item {
+    background: #fff;
+    max-width: 60rem;
+    margin: 3rem auto;
     position: relative;
-    width: 90rem;
+    padding:  2rem;
+    opacity: 0;
+    transform: scale(0);
+    @include anim();
+  }
+  &--youtube {
+    width: 95%;
+    margin: 3rem auto;
+    position: relative;
+    opacity: 0;
+    transform: scale(0);
+    @include anim();
     @include mq($from: tablet) {
-      width: 100%;
-    }
-    @include mq($from: desktop) {
-      width: 80rem;
-    }
-    @include mq($from: wide) {
       width: 90rem;
     }
     &:after {
       content: '';
       display: block;
-      padding-bottom: 56.20%;
+      padding-bottom: 56.25%;
     }
     button {
-      background: transparent;
       transform: translateY(-100%);
-      top: -1.5rem;
-      svg {
-        color: #fff;
-      }
+      background: transparent;
+      top: -2rem;
     }
     iframe {
       position: absolute;
       left: 0;
       right: 0;
-      top: 0;
       bottom: 0;
+      top: 0;
+      margin: auto;
       width: 100%;
       height: 100%;
     }
   }
-}
-
-
-.modal {
-  opacity: 0;
-  pointer-events: none;
-  @include anim();
-  &--item {
-    position: relative;
-    background: #fff;
-    max-width: 75rem;
-    padding: 4rem;
+  &--close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #000;
+    cursor: pointer;
+    z-index: $index + 1;
+    svg {
+      pointer-events: none;
+      font-size: 3rem;
+      color: #fff;
+    }
   }
+
   &__auth {
 
   }

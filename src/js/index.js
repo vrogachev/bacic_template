@@ -1,4 +1,11 @@
-//let modal = require('./modules/modal');
+let modal = require('./modules/modal');
+let tabs = require('./modules/tabs');
+
+
+modal({
+    debug: true,
+    button: '[data-button="open"]',
+});
 
 
 
