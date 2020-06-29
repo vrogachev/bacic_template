@@ -1,0 +1,36 @@
+@import "utils/libs";
+@import "utils/vars";
+@import "utils/mq";
+@import "utils/mixins";
+@import "utils/fonts";
+@import "utils/reset";
+
+html {
+  line-height: $mainLineHeight;
+  font-size: $mainFontSize;
+  color: $mainFontColor;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $mainFont;
+  font-size: 1.6rem;
+  font-weight: $mainFontWeight;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #E5E5E5;
+  height: 1000px;
+  &.modal--opened {
+    overflow-y: hidden;
+  }
+}
+
+
+// Modules
+@import "modules/header";
+@import "modules/footer";
+@import "modules/helpers";
+@import "modules/modal";
+

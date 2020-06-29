@@ -1,0 +1,18 @@
+.breadcrumbs {
+  li {
+    display: inline-block;
+    margin-right: 1.5rem;
+    &:last-child {
+      margin-right: 0;
+      a {
+        opacity: .5;
+      }
+    }
+    a {
+      color: #171D32;
+      font-size: rem(14);
+    }
+  }
+}
+
+

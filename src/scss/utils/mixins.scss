@@ -1,0 +1,70 @@
+// px to rem
+@function rem($pixels, $context: $mainFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return $pixels / $context * 1rem;
+}
+
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@mixin font($font_name, $file_name, $weight, $style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+@mixin anim {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+@mixin absolute {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+//Медиа-запросы
+@mixin media {
+  padding: 0 1em;
+  margin: 0 auto;
+  width:  100%;
+  @include mq($from: tablet) {
+    width: $tabletWidth;
+  }
+  @include mq($from: desktop) {
+    width: $desktopWidth;
+  }
+  @include mq($from: wide) {
+    width: $wideWidth;
+  }
+  @include mq($from: xwide) {
+    width: $xwideWidth;
+  }
+}
+
+
+//Медиа-запросы
+$mq-breakpoints: (
+        mobile: 320px,
+        tablet: 768px,
+        desktop: 992px,
+        wide: 1200px,
+        xwide: 1400px
+);
