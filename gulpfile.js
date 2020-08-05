@@ -37,7 +37,7 @@ let gulp = require('gulp'),
     panini    = require('panini'),
     browsersync = require('browser-sync').create(),
     plumber = require("gulp-plumber");
-    del = require('del'),
+del = require('del'),
     scss = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     groupmedia = require('gulp-group-css-media-queries'),
@@ -60,11 +60,8 @@ let gulp = require('gulp'),
     imageminSvgo = require('imagemin-svgo'),
     bourbon  = require('node-bourbon'),
     notify = require('gulp-notify'),
-    browserify = require('browserify'),
     source = require('vinyl-source-stream'),
-    babelify = require("babelify"),
-    buffer = require("vinyl-buffer");
-
+    fileinclide = require('gulp-file-include');
 
 
 
@@ -89,7 +86,7 @@ html = () => {
     return src(path.src.html, { base: 'src/views/pages/' })
         .pipe(plumber())
         .pipe(panini({
-            root: 'src/',
+            root: 'src/pages/',
             layouts: 'src/views/layouts/',
             partials: 'src/views/partials/',
             helpers: 'src/views/helpers/',
@@ -101,18 +98,13 @@ html = () => {
 
 
 js = () => {
-    return (
-        browserify({
-            entries: [`./src/js/index.js`],
-            transform: [babelify.configure({ presets: ["@babel/preset-env"] })]
-        })
-            .bundle()
-            .pipe(source("main.js"))
-            .pipe(buffer())
-            //.pipe(uglify())
-            .pipe(gulp.dest(`./dist/js/`))
-            .pipe(browsersync.stream())
-    );
+    return src('./src/js/index.js')
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(rename('main.js'))
+        .pipe(dest(path.build.js))
+        .pipe(browsersync.stream())
 };
 
 
@@ -190,7 +182,7 @@ images = () => {
 
 //Спрайты
 svg = () => {
-     src(path.src.icons)
+    src(path.src.icons)
         .pipe(svgmin({
             js2svg: {
                 pretty: true
